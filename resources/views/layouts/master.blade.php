@@ -200,14 +200,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </router-link>
           </li>
 
+
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-power-off"></i>
-              <p>
-                Logout
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
+           
+             <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                 <i class="fas fa-power-off red "></i>
+              <p> {{ __('Logout') }}</p>
+              </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
+
           </li>
           
         </ul>
