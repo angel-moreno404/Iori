@@ -166,11 +166,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fas fa-address-book"></i>
-                  <p>Consulta de Pasiente</p>
-                </a>
+                <router-link to="/Users" href="#" class="nav-link active">
+                  <i class="far fas fa-users"></i>
+                  <p>Consulta de Pasiente Users</p>
+                </router-link >
               </li>
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fas fa-address-card"></i>
