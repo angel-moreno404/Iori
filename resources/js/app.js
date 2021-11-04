@@ -29,7 +29,7 @@ Vue.component(AlertSuccess.name, AlertSuccess)
 import Vue from 'vue';
 
 
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
 

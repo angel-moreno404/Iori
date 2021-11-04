@@ -59,6 +59,7 @@
            <h5 class="modal-title" id="addnewLa bel">Creating Users</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+           <form @submit.prevent="createUser">
           <div class="modal-body">
                 <!-- name -->
                   <div class="form-group">
@@ -123,11 +124,14 @@
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                       <button type="button" class="btn btn-primary">Create</button>
                   </div>
+                 
+                   
           </div>
+           </form>
         </div>
      </div>
     </div>
-  </div>
+     </div>
 </template>
 
 
@@ -153,7 +157,12 @@ import Form from 'vform'
       },
 
 
+      methods: {
+        createUser(){
 
+          this.form.post('api/user')
+        }
+      },
 
 
         mounted() {
