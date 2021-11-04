@@ -7,10 +7,10 @@
                 <h3 class="card-title">Users table</h3>
 
                 <div class="card-tools">
-                  <botton class="btn btn-success" data-toggle="modal" 
-                  data-target="#addnew"> Create new users  <i class="fa fa-user-plus fa-fw"></i></botton>
+                  <button class="btn btn-success" data-toggle="modal" 
+                  data-target="#addnew"> Create new users  <i class="fa fa-user-plus fa-fw"></i></button>
                  
-                </div>
+                </div>  
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -58,24 +58,104 @@
           <div class="modal-header">
            <h5 class="modal-title" id="addnewLa bel">Creating Users</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-              <div class="modal-body">
-        ...
-           </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create</button>
-      </div>
+          </div>
+          <div class="modal-body">
+                <!-- name -->
+                  <div class="form-group">
+
+                  <input v-model="form.name" type="text" name="name"
+                  placeholder="Name"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('name') }"> 
+                  <has-error :form="form" field="name"></has-error>
+                  </div>
+                  <!-- email -->
+                   <div class="form-group">
+
+                  <input v-model="form.email" type="email" name="email"
+                  placeholder="Enter Email"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('email') }"> 
+                  <has-error :form="form" field="email"></has-error>
+                  </div>
+                  
+
+                  <!-- password -->
+                   <div class="form-group">
+
+                  <input v-model="form.password" type="password" name="password" id="password"
+                  placeholder="password"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('password') }"> 
+                  <has-error :form="form" field="password"></has-error>
+                  </div>
+                  <!-- type -->
+                   <div class="form-group">
+
+                    <select name="type" v-model="form.type" id="type"
+                    
+                    class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+
+                     <option value="">select user role </option>
+                     <option value="admin">select user role </option>
+                      <option value="user">users standar </option>
+                       <option value="author">Author </option>
+                    </select>
+
+                    <has-error :form="form" field="type"></has-error>
+                  </div>
+                   <!-- photo -->
+                   <div class="form-group">
+
+                  <input v-model="form.photo" type="text" name="photo"
+                  placeholder="photo"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('photo') }"> 
+                  <has-error :form="form" field="photo"></has-error>
+                  </div>
+
+                  <!--  bio -->
+                   <div class="form-group">
+
+                  <textarea v-model="form.bio" type="text" name="bio" id="bio"
+                  placeholder=" short bio for users (optional)"
+                  class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
+                  <has-error :form="form" field="bio"></has-error>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Create</button>
+                  </div>
+          </div>
+        </div>
      </div>
-     </div>
-</div>
     </div>
+  </div>
 </template>
 
 
 
 <script>
+import Form from 'vform'
     export default {
+      data(){
+
+        return{
+
+          form: new Form({
+            name :'',
+            email: '',
+            password: '',
+            type: '',
+            bio: '',
+            photo: ''
+
+
+          })
+        }
+      },
+
+
+
+
+
         mounted() {
             console.log('Component mounted.')
         }
