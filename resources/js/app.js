@@ -8,11 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import Form from 'vform'
-
+ import moment from 'moment';
 //import{Form, HasError, AlertError} from 'vform';
 import {
   Button,
-  HasError,
+  HasError, 
   AlertError,
   AlertErrors,
   AlertSuccess
@@ -25,6 +25,27 @@ Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component(AlertErrors.name, AlertErrors)
 Vue.component(AlertSuccess.name, AlertSuccess)
+//sweet alert
+
+
+import swal from 'sweetalert2';
+window.swal = swal;
+window.Toast = swal;
+const Toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+
+//sweet alert
+
 
 import Vue from 'vue';
 
@@ -32,6 +53,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
+
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '3px'    
+})
 
 let routes = [
     { path: '/dashboard', component:  require('./components/dashboard.vue').default },
@@ -44,6 +73,21 @@ let routes = [
     mode:'history',
     routes // short for `routes: routes`
   })
+
+  
+  Vue.filter('upText', function(text){
+    return text.charAt(0).toUpperCase() + text.slice(1)
+  })
+  
+  Vue.filter('mydate', function(created){
+
+    return moment(created).format('MMMM Do YYYY, h:mm:ss a'); // November 8th 2021, 9:17:22 am
+  })
+
+  //Vue.filter('upText', function (text) {
+   // return text.toUpperCase()  
+  //})
+  
 
 /**
  * The following block of code may be used to automatically register your

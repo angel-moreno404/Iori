@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/Users" href="#" class="nav-link active">
+                <router-link to="/Users" href="#" class="nav-link ">
                   <i class="far fas fa-users"></i>
                   <p>Consulta de Pasiente Users</p>
                 </router-link >
@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
            
              <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
+                  document.getElementBy Id('logout-form').submit();">
                  <i class="fas fa-power-off red "></i>
               <p> {{ __('Logout') }}</p>
               </a>
@@ -232,7 +232,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <router-view></router-view>
-        
+
+
+        <vue-progress-bar></vue-progress-bar>
+      
       </div><!-- /.container-fluid -->
     </div>
 

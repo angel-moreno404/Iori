@@ -30,8 +30,8 @@
                       <td>{{user.id}}</td>
                       <td>{{user.name}}</td>
                       <td>{{user.email}}</td>
-                      <td>{{user.type}}</td>
-                      <td>{{user.created_at}}</td>
+                      <td>{{user.type| upText}}</td>
+                      <td>{{user.created_at | mydate}}</td>
                       <td><span class="tag tag-success">Approved</span></td>
                       <td>
                           <a href="#">
@@ -168,14 +168,21 @@ import axios from 'axios'
         },
 
         createUser(){
-
+          this.$Progress.start();
           this.form.post('api/user');
+          $('#addnew').modal('hide');
+          Toast.fire({
+          icon: 'success',
+          title: 'Created in successfully'
+        })
+          this.$Progress.finish();
         }
       },
 
 
         created() {
             this.loadUsers();
+            setInterval(() => this.loadUsers(), 3000);
         }
     }
 </script>
