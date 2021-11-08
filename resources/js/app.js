@@ -83,10 +83,10 @@ let routes = [
 
     return moment(created).format('MMMM Do YYYY, h:mm:ss a'); // November 8th 2021, 9:17:22 am
   })
-
-  //Vue.filter('upText', function (text) {
-   // return text.toUpperCase()  
-  //})
+//  para hacer un request cada ves que se cree un usuario 
+  window.Fire = new Vue();
+//
+  
   
 
 /**
