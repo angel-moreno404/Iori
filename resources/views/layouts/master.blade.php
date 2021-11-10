@@ -173,10 +173,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                 <router-link to="/Pasiente" href="#" class="nav-link ">
                   <i class="fas fa-address-card"></i>
                   <p>Registro de Pasiente</p>
-                </a>
+                </route-link>
               </li>
             </ul>
           </li>
