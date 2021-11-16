@@ -11,6 +11,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel= "stylesheet" href="/css/app.css">
 
+  <!-- Info usuario -->
+     @if (Auth::check()) 
+         <meta name="user_info" content="{{ Auth::user() }}" />
+    @endif
+
 </head>
 <body class="hold-transition sidebar-mini" >
 <div class="wrapper" id= 'app'>
@@ -196,16 +201,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
            
              <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                  document.getElementBy Id('logout-form').submit();">
+                  document.getElementById('logout-form').submit();">
                  <i class="fas fa-power-off red "></i>
-              <p> {{ __('Logout') }}</p>
+                <p> {{ __('Logout') }}</p>
+               
               </a>
+              
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                   </form>
 
           </li>
-          
+              
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

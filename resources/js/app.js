@@ -26,7 +26,7 @@ Vue.component(AlertError.name, AlertError)
 Vue.component(AlertErrors.name, AlertErrors)
 Vue.component(AlertSuccess.name, AlertSuccess)
 //sweet alert
-
+Vue.prototype.$userInfo = JSON.parse(document.querySelector("meta[name='user_info']").getAttribute('content'));
 
 import swal from 'sweetalert2';
 window.swal = swal;
@@ -105,7 +105,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
   el: '#app',
-  router
+  router,
 });
 /**
  * Next, we will create a fresh Vue application instance and attach it to
