@@ -155,13 +155,15 @@ height: 1000px;
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="email" v-model="form.name" class="form-control" id="inputName" placeholder="Name">
+                          <input type="email" v-model="form.name" class="form-control" id="inputName" placeholder="Name"
+                            :class="{ 'is-invalid': form.errors.has('name') }">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email"
+                          :class="{ 'is-invalid': form.errors.has('email') }">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -176,6 +178,32 @@ height: 1000px;
                           <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
                         </div>
                       </div>
+                      <!--begin this is to loadding photo-->
+                      <div class="form-group">
+                        <label for= "photo" class ="col-sm-2 control-label"> profile photo </label>
+                          <div class="col-sm-12">
+                            <input type="file" @change="updateProfile" name="photo" class="form-input">
+                          </div>
+                      </div>    
+                         <!-- this is to loadding photo end-->
+
+                      <!-- this is to loadding photo end-->
+                      <div class="form-group">
+                          <label for="passport" class="col-sm-12 control-label"> password leave empty if not changing</label>
+                           <div class="col-sm-12">
+                            <input type="passport" v-model="form.password" class="form-control" id="password"
+                              placeholder ="Password" 
+                              :class="{ 'is-invalid': form.errors.has('password') }">
+                            </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-12">
+                          <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
+                        </div>
+                      </div>
+                <!--    </form>                  -->     
+                <!-- this is to loadding photo end -->
                       
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
@@ -231,7 +259,49 @@ height: 1000px;
             //this.usuario = this.$userInfo;
             this.form.fill(this.$userInfo);
         },
+      methods:{
 
+        updateInfo(){
+          this.$Progress.start();
+           this.form.put('api/profile/')
+           .then(()=>{
+             this.$Progress.finish();
+
+           })
+           .catch(()=>{
+             this.$Progress.fail();
+           });
+        },
+
+        updateProfile(e){
+          //this is to tranlate to base64 the file
+          let file = e.target.files[0];
+          console.log(file);
+          let reader = new FileReader();
+          //let vm= this;
+
+          if(file['size'] < 2111775 ){
+
+          
+          reader.onloadend= (file)=>{
+
+            this.photo=reader.result;
+            //console.log('RESULT', reader.result)
+            this.form.photo=reader.result;
+          }
+            reader.readAsDataURL(file);
+         // console.log('uploading');
+        }
+        else{
+          swal({
+            type:'error',
+            title:'Ooops...',
+            text:'you are uploading a large file please try with other more little',
+          })
+          
+        }
+        }
+      },
         
     }
 </script>

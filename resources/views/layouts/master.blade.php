@@ -142,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <router-link to="/dashboard" href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                dashboard
+                Consultas
                 <span class="right badge badge-danger">New</span>
               </p>
             </router-link>
@@ -155,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-hospital-user "></i>
               <p>
-                Management
+                Administracion
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -180,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <router-link to="/profile" href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
-                Profile
+                Perfil
                 <span class="right badge badge-danger">New</span>
               </p>
             </router-link>
@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <router-link to="/AdministradorUsuario" href="#" class="nav-link">
               <i class="fas fa-user-md"></i>
               <p>
-                Administrador de Usuarios
+                Configuracion
                 <span class="right badge badge-danger">New</span>
               </p>
             </router-link>
