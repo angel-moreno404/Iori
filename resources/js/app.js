@@ -18,6 +18,9 @@ import {
   AlertSuccess
 } from 'vform/src/components/bootstrap4'
 
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 window.Form = Form;
 
 Vue.component(Button.name, Button)
@@ -74,7 +77,7 @@ let routes = [
     mode:'history',
     routes // short for `routes: routes`
   })
-
+  
   
   Vue.filter('upText', function(text){
     return text.charAt(0).toUpperCase() + text.slice(1)
@@ -102,6 +105,10 @@ let routes = [
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+Vue.component(
+  'not-found', require('./components/NotFound.vue').default
+);
 
 const app = new Vue({
   el: '#app',

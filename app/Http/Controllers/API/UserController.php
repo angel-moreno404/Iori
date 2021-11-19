@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Image;
+use App\Models\Post;
+
 
 class UserController extends Controller
 {
@@ -18,10 +20,12 @@ class UserController extends Controller
     public function __construct()
     {
        $this->middleware('api');
+       //$this->authorize('isAdmin');
     }
 
     public function index()
     {
+        //$this->authorize('isAdmin');
         return User::paginate(17);
     }
 
@@ -121,6 +125,12 @@ class UserController extends Controller
             'password'=> 'sometimes|string|min:6',
         ]);
 
+        if(!empty($request->password)){
+            $request->merge([ 'password'=> Hash::make ($request['password'])]);
+
+           
+        }
+
         $user->update($request->all());
         return ['massage'=> 'update the user'];
     }
@@ -131,8 +141,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {   
+      //$this->authorize('isAdmin');
+      
         $user = User::findOrFail($id);
         //delete user
         $user->delete();
