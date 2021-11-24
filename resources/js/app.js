@@ -20,6 +20,7 @@ import {
 
 import Gate from "./Gate";
 Vue.prototype.$gate = new Gate(window.user);
+Vue.component('pagination', require('laravel-vue-pagination'));Vue.component('pagination', require('laravel-vue-pagination'));
 
 window.Form = Form;
 
@@ -70,7 +71,8 @@ let routes = [
     { path: '/AdministradorUsuario', component:  require('./components/AdministradorUsuario.vue').default },
     { path: '/Users', component:  require('./components/Users.vue').default },
     { path: '/profile', component:  require('./components/profile.vue').default},
-    { path: '/Pasiente', component:  require('./components/Pasiente.vue').default}
+    { path: '/Pasiente', component:  require('./components/Pasiente.vue').default},
+    { path: '*', component:  require('./components/NotFound.vue').default}
   ]
 
   const router = new VueRouter({
@@ -113,6 +115,21 @@ Vue.component(
 const app = new Vue({
   el: '#app',
   router,
+  data:{
+
+      search:''
+  },
+
+  methods:{
+
+    searchit(){
+      console.log("searching . . .");
+    Fire.$emit("searching");
+    }
+
+  }
+
+
 });
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -8,7 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Image;
 use App\Models\Post;
-
+use Illuminate\Support\Facades\Gate;
+use SebastianBergmann\Environment\Console;
 
 class UserController extends Controller
 {
@@ -24,9 +25,12 @@ class UserController extends Controller
     }
 
     public function index()
-    {
-        //$this->authorize('isAdmin');
-        return User::paginate(17);
+    {   
+        //dd(Gate::allows('isAdmin'));
+      //if (Gate::allows('isAdmin') || Gate::allows('isAuthor')){
+        
+        return User::paginate(4);//}
+        $this->authorize('isAdmin');
     }
 
     /**
@@ -152,4 +156,20 @@ class UserController extends Controller
         return['massage' => 'User deleted'];
 
     }
+
+    public function search(Request $request){
+  
+     if($search = \Request::get('q')){
+
+            $users = User::where(function($query) use($search){
+
+                $query->where('name', 'LIKE', "%$search%")
+                    ->orWhere('email', 'LIKE', "%$search%")
+                     ->orWhere('type', 'LIKE', "%$search%");
+            }) ->paginate(20);
+       }
+        return $users;
+    
+    }
+
 }

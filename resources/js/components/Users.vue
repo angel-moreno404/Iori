@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row mt-5" v-if="$gate.isAdmin()">
+    <div class="row mt-5" v-if="$gate.isAdminORAuthor()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="user in users.data" :key="user.id">
                   <td>{{ user.id }}</td>
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
@@ -49,12 +49,21 @@
             </table>
           </div>
           <!-- /.card-body -->
+        <div class="card-footer"> 
+
+          <pagination :data="users" @pagination-change-page="getResults"></pagination>
+          <pagination :data="laravelData">
+            <span slot="prev-nav">&lt; Previous</span>
+            <span slot="next-nav">Next &gt;</span>
+          </pagination>
+        </div>
+
         </div>
         <!-- /.card -->
       </div>
     </div>
 
-  <div v-if="!$gate.isAdmin() ">  <not-found></not-found>  
+  <div v-if="!$gate.isAdminORAuthor() ">  <not-found></not-found>  
    </div>
 
     <!-- Modal -->
@@ -209,6 +218,12 @@ export default {
   },
 
   methods: {
+
+getResults(page = 1) {
+			axios.get('api/user?page=' + page)
+				.then(response => {
+					this.users = response.data;
+				})},
     updateUser (id)
     { this.$Progress.start();
       this.form.put('api/user/'+this.form.id)
@@ -267,13 +282,14 @@ export default {
     },
 
     loadUsers() {
-      /* this is to the permission to block the views a allow just admin
+      /* this is to the permission to block the views a allow just admin*/
 
-      if(this.$gate.isAdmin){
-
+      if(this.$gate.isAdminORAuthor()){
+        axios.get("api/user").then(({ data }) => (this.users = data));
+         //axios.get("api/user").then(({ data }) => (this.users = data.data));
       }
-      */ 
-      axios.get("api/user").then(({ data }) => (this.users = data.data));
+      
+      
     },
 
     createUser() {
@@ -295,6 +311,21 @@ export default {
   },
 
   created() {
+    //let query = this.$parent.search;
+    Fire.$on('searching', () => {
+      let query = this.$parent.search;
+      axios.get('api/findUser?q=' + query)
+      .then((data)=>{
+        this.users = data.data;
+        //console.log(query);
+      })
+      .catch(()=>{
+
+
+      })
+
+    })
+
     this.loadUsers();
     Fire.$on("AfterCreate", () => {
       this.loadUsers();
