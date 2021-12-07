@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          <div class="navbar-search-block"> 
          <!-- <form class="form-inline ml-3"> -->
             <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" @keyup.enter="searchit" v-model="search" type="search" 
+              <input class="form-control form-control-navbar" @keyup="searchit" v-model="search" type="search" 
               placeholder="Search" aria-label="Search">
               <div class="input-group-append">
               <button class="btn btn-navbar" @click="searchit">
@@ -155,7 +155,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
         //@endcan;
           
+          <li class="nav-item ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user "></i>
+              <p>
+                Recursos Medicos
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to=/Almacen href="#" class="nav-link ">
+                  <i class="far fas fa-users"></i>
+                  <p>Almacen</p>
+                </router-link >
+              </li>
 
+              <li class="nav-item">
+                 <router-link to=Movimientos href="#" class="nav-link ">
+                  <i class="fas fa-address-card"></i>
+                  <p>Movimineto</p>
+                </route-link>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item ">
             <a href="#" class="nav-link">
@@ -179,6 +202,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Registro de Pasiente</p>
                 </route-link>
               </li>
+            </ul>
+          </li>
+          <!-- /* //this is to build the pasient historial*/ -->
+           <li class="nav-item ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user "></i>
+              <p>
+                Imfomacion de pasientes 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/Antecedentes" href="#" class="nav-link ">
+                  <i class="far fas fa-users"></i>
+                  <p>Antecedentes Medicos </p>
+                </router-link >
+              </li>
+
+              <li class="nav-item">
+                 <router-link to="/HistorialM" href="#" class="nav-link ">
+                  <i class="fas fa-address-card"></i>
+                  <p>Historial Medico</p>
+                </route-link>
+              </li>
+
+              <li class="nav-item">
+                 <router-link to="/HistorialC" href="#" class="nav-link ">
+                  <i class="fas fa-address-card"></i>
+                  <p>Historial cosultas</p>
+                </route-link>
+              </li>
+
             </ul>
           </li>
 

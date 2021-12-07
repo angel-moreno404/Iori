@@ -52,7 +52,7 @@
         <div class="card-footer"> 
 
           <pagination :data="users" @pagination-change-page="getResults"></pagination>
-          <pagination :data="laravelData">
+
             <span slot="prev-nav">&lt; Previous</span>
             <span slot="next-nav">Next &gt;</span>
           </pagination>

@@ -166,7 +166,10 @@ class UserController extends Controller
                 $query->where('name', 'LIKE', "%$search%")
                     ->orWhere('email', 'LIKE', "%$search%")
                      ->orWhere('type', 'LIKE', "%$search%");
-            }) ->paginate(20);
+            }) ->paginate(10);
+       }else{
+        $users=User::paginate(5);
+
        }
         return $users;
     

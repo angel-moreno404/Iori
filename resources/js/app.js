@@ -72,7 +72,12 @@ let routes = [
     { path: '/Users', component:  require('./components/Users.vue').default },
     { path: '/profile', component:  require('./components/profile.vue').default},
     { path: '/Pasiente', component:  require('./components/Pasiente.vue').default},
-    { path: '*', component:  require('./components/NotFound.vue').default}
+    { path: '/Almacen', component:  require('./components/Almacen.vue').default},
+    { path: '/Movimientos', component:  require('./components/Movimientos.vue').default},
+    { path: '/Antecedentes', component:  require('./components/Antecedentes.vue').default},
+    { path: '/HistorialM', component:  require('./components/HistorialM.vue').default},
+    { path: '/HistorialC', component:  require('./components/HistorialC.vue').default},
+    //{ path: '*', component:  require('./components/NotFound.vue').default}
   ]
 
   const router = new VueRouter({
@@ -122,10 +127,14 @@ const app = new Vue({
 
   methods:{
 
-    searchit(){
+    searchit: _.debounce(()=> {
+
       console.log("searching . . .");
-    Fire.$emit("searching");
-    }
+      Fire.$emit("searching");
+    },1000),
+
+   
+    
 
   }
 
