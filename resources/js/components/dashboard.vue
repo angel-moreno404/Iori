@@ -37,13 +37,13 @@
                   
                   <td><span class="tag tag-success">Approved</span></td>
                   <td>
-                    <a href="#" >
-                      <i class="fa fa-edit blue"></i>
-                    </a>
-                    /
-                    <a href="#" @click="deleteUser(user.id)">
-                      <i class="fa fa-trash red"></i>
-                    </a>
+                    <div class="card-tools">
+              <button
+                class="btn btn-success" @click="newModal"
+              >
+                selecionar<i class="fa fa-user-plus fa-fw"></i>
+              </button>
+            </div>
                   </td>
                 </tr>
               </tbody>

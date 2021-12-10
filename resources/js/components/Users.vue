@@ -13,6 +13,10 @@
                 Create new users <i class="fa fa-user-plus fa-fw"></i>
               </button>
             </div>
+            <!--this is to trying the search bar   -->
+          
+
+            <!--this is to trying the search bar   -->
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">

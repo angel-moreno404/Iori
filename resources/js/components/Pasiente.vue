@@ -1,23 +1,427 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Pasiente Component</div>
+  <div class="container">
+    <div class="row mt-5" v-if="$gate.isAdminORAuthor()">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tabla de Pacientes </h3>
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
+            <div class="card-tools">
+              <button
+                class="btn btn-success" @click="newModal"
+              >
+                Ingresar Nuevo Paciente <i class="fa fa-user-plus fa-fw"></i>
+              </button>
             </div>
+            <!--this is to trying the search bar   -->
+          
+
+            <!--this is to trying the search bar   -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>nombre</th>
+                  <th>apellido</th>
+                  <th>cedula</th>
+                  <th>tlf1</th>
+                  <th>tlf2</th>
+                  <th>correo</th>
+                  <th>sexo</th>
+                  <th>direccion</th>
+                  <th>tipo</th>
+                  <th>foto</th>
+                  <th>estado</th>
+                  <th>registered at</th>
+                  <th>Modify</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr v-for="user in pacientes.data" :key="user.id">
+                
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.nombre }}</td>
+                  <td>{{ user.apellido }}</td>
+                  <td>{{ user.cedula }}</td>
+                  <td>{{ user.telefono }}</td>
+                  <td>{{ user.telefono2 }}</td>
+                  <td>{{ user.correo }}</td>
+                  <td>{{ user.sexo }}</td>
+                  <td>{{ user.direccion }}</td>
+                  <td>{{ user.tipo }}</td>
+                  <td>{{ user.foto }}</td>
+                  <td>{{ user.estado }}</td>
+                  <td>{{ user.created_at | mydate }}</td>
+                  <td><span class="tag tag-success">Approved</span></td>
+                  <td>
+                    <a href="#" @click="editModal(user)">
+                      <i class="fa fa-edit blue"></i>
+                    </a>
+                    /
+                    <a href="#" @click="deleteUser(user.id)">
+                      <i class="fa fa-trash red"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        <div class="card-footer"> 
+
+          <pagination :data="pacientes" @pagination-change-page="getResults"></pagination>
+
+           
+        
         </div>
+
+        </div>
+        <!-- /.card -->
+      </div>
     </div>
+
+  <div v-if="!$gate.isAdminORAuthor() ">  <not-found></not-found>  
+   </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="addnew"
+      tabindex="-1"
+      aria-labelledby="addnewLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" v-show="!editmode" id="addnewLa bel">Ingresando Paciente</h5>
+            <h5 class="modal-title" v-show="editmode" id="addnewLa bel">Actualizando Datos del Paciente </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form @submit.prevent="editmode ? updateUser () : createUser()">
+            <div class="modal-body">
+              <!-- nombre -->
+              <div class="form-group">
+                <input
+                  v-model="form.nombre"
+                  type="text"
+                  name="nombre"
+                  placeholder="nombre"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('nombre') }"
+                />
+                <has-error :form="form" field="nombre"></has-error>
+              </div>
+               <!-- apellido -->
+              <div class="form-group">
+                <input
+                  v-model="form.apellido"
+                  type="text"
+                  name="apellido"
+                  placeholder="apellido"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('apellido') }"
+                />
+                <has-error :form="form" field="apellido"></has-error>
+              </div>
+               <!-- cedula -->
+              <div class="form-group">
+                <input
+                  v-model="form.cedula"
+                  type="text"
+                  name="cedula"
+                  placeholder="cedula"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('cedula') }"
+                />
+                <has-error :form="form" field="cedula"></has-error>
+              </div>
+               <!-- telefono -->
+              <div class="form-group">
+                <input
+                  v-model="form.telefono"
+                  type="text"
+                  name="telefono"
+                  placeholder="telefono"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('telefono') }"
+                />
+                <has-error :form="form" field="telefono"></has-error>
+              </div>
+               <!-- telefono2 -->
+              <div class="form-group">
+                <input
+                  v-model="form.telefono2"
+                  type="text"
+                  name="telefono2"
+                  placeholder="telefono2"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('telefono2') }"
+                />
+                <has-error :form="form" field="telefono2"></has-error>
+              </div>
+              <!-- correo -->
+              <div class="form-group">
+                <input
+                  v-model="form.correo"
+                  type="email"
+                  name="correo"
+                  placeholder="correo"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('correo') }"
+                />
+                <has-error :form="form" field="correo"></has-error>
+              </div>
+              <!-- sexo -->
+              <div class="form-group">
+                <input
+                  v-model="form.sexo"
+                  type="text"
+                  name="sexo"
+                  placeholder="sexo"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('sexo') }"
+                />
+                <has-error :form="form" field="sexo"></has-error>
+              </div>
+              <!-- direccion -->
+              <div class="form-group">
+                <input
+                  v-model="form.direccion"
+                  type="text"
+                  name="direccion"
+                  placeholder="direccion"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('direccion') }"
+                />
+                <has-error :form="form" field="direccion"></has-error>
+              </div>
+              <!-- tipo -->
+              <div class="form-group">
+                <select
+                  name="tipo"
+                  v-model="form.tipo"
+                  id="tipo"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('tipo') }"
+                >
+                  <option value="">Admin</option>
+                  <option value="admin">Admin</option>
+                  <option value="user">Paciente</option>
+                  <option value="author">Paciente Especial</option>
+                </select>
+
+                <has-error :form="form" field="tipo"></has-error>
+              </div>
+              <!-- foto -->
+              <div class="form-group">
+                <input
+                  v-model="form.foto"
+                  type="text"
+                  name="foto"
+                  placeholder="foto"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('foto') }"
+                />
+                <has-error :form="form" field="foto"></has-error>
+              </div>
+              <!-- estado -->
+              <div class="form-group">
+                <input
+                  v-model="form.estado"
+                  type="text"
+                  name="estado"
+                  placeholder="estado"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('estado') }"
+                />
+                <has-error :form="form" field="estado"></has-error>
+              </div>
+              
+              
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button v-show= "editmode" type="submit" class="btn btn-primary">update</button>
+                <button v-show= "!editmode" type="submit" class="btn btn-primary">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
+
+
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
+import Form from "vform";
+import axios from "axios";
+import NotFound from './NotFound.vue';
+export default {
+  components: { NotFound },
+  data() {
+    return {
+      editmode: false,
+      
+      pacientes: {},
+   
+      form: new Form({
+        id: "",
+        nombre: "",
+        apellido: "",
+        cedula: "",
+        telefono: "",
+        telefono2: "",
+        correo: "",
+        sexo: "",
+        direccion: "",
+        tipo: "",
+        foto: "",
+        estado: "",
+        
+      }),
+    };
+  },
+
+  mounted(){
+    console.log(this.$userInfo);
+   
+  },
+
+  methods: {
+
+getResults(page = 1) {
+			axios.get('api/paciente?page=' + page)
+				.then(response => {
+					this.pacientes = response.data;
+				})},
+    updateUser (id)
+    { //console.log("here lol");
+      this.$Progress.start();
+      this.form.put('api/paciente/'+this.form.id)
+        .then(()=>{
+
+            swal.fire("Updated!", "Your file has been Updated.", "success")
+            $("#addnew").modal("hide");
+            this.$Progress.finish();
+            Fire.$emit("AfterCreate");
+        })
+        .catch(()=>{
+          this.$Progress.fail();
+        });
+
+      
+      //console.log('Editing Data') 
+    },
+
+    editModal(user){
+      this.editmode=true;
+      this.form.reset();
+      $("#addnew").modal("show");
+      this.form.fill(user);
+    },
+    newModal(){
+       this.editmode=false;
+      this.form.reset();
+      $("#addnew").modal("show");
+    },
+
+    deleteUser(id) {
+      swal
+        .fire({
+          title: "Estas seguro?",
+          text: "No Seras Capaz de Revertir Esto",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "SI, Borralo!",
+        })
+        .then((result) => {
+          //send request to the server
+          if (result.value){
+          this.form
+            .delete(`api/paciente/${id}`) //ejemplo de como enviar las rutas y promesas
+            .then(() => {
+              swal.fire("Borrado!", "El usurario a sido borrado.", "Sastifactoriamente")
+              Fire.$emit("AfterCreate");
+            })
+            .catch(() => {
+              swal("fallo!", "there was something wrong", "warning");
+            });
         }
-    }
+        });
+    },
+
+    loadUsers() {
+      /* this is to the permission to block the views a allow just admin*/
+
+      //if(this.$gate.isAdminORAuthor()){
+        axios.get("api/paciente").then(( { data } ) => (this.pacientes = data));
+          
+         //axios.get("api/user").then(({ data }) => (this.users = data.data));
+      //}
+      
+      
+    },
+
+    createUser() {
+     
+      this.$Progress.start();
+      this.form
+        .post("api/paciente")
+        .then(() => {
+          Fire.$emit("AfterCreate");
+          $("#addnew").modal("hide");
+          Toast.fire({
+            icon: "success",
+            title: "Created in successfully",
+          });
+          this.$Progress.finish();
+        })
+
+        .catch(() => {});
+    },
+  },
+
+  created() {
+    //let query = this.$parent.search;
+    Fire.$on('searching', () => {
+      let query = this.$parent.search;
+      axios.get('api/findPaciente?q=' + query)
+      .then((data)=>{
+        this.pacientes = data.data;
+        //console.log(query);
+      })
+      .catch(()=>{
+
+
+      })
+
+    })
+
+    this.loadUsers();
+    Fire.$on("AfterCreate", () => {
+      this.loadUsers();
+    });
+    // setInterval(() => this.loadUsers(), 3000);
+  },
+};
 </script>
+

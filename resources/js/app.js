@@ -120,9 +120,13 @@ Vue.component(
 const app = new Vue({
   el: '#app',
   router,
-  data:{
+  data(){
+return {
 
-      search:''
+  search:''
+  
+}
+     
   },
 
   methods:{
