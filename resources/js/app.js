@@ -77,6 +77,10 @@ let routes = [
     { path: '/Antecedentes', component:  require('./components/Antecedentes.vue').default},
     { path: '/HistorialM', component:  require('./components/HistorialM.vue').default},
     { path: '/HistorialC', component:  require('./components/HistorialC.vue').default},
+    { path: '/Facturacion', component:  require('./components/Facturacion.vue').default},
+    { path: '/RecepcionP', component:  require('./components/RecepcionP.vue').default},
+    { path: '/CronogramaCitas', component:  require('./components/CronogramaCitas.vue').default},
+    { path: '/GestorPaciente', component:  require('./components/GestorPaciente.vue').default},
     //{ path: '*', component:  require('./components/NotFound.vue').default}
   ]
 
@@ -96,6 +100,7 @@ let routes = [
   })
 //  para hacer un request cada ves que se cree un usuario 
   window.Fire = new Vue();
+  window.Boom = new Vue();
 //
   
   

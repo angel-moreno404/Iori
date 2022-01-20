@@ -11,7 +11,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Gate;
 use SebastianBergmann\Environment\Console;
 
-class UserController extends Controller
+class ConsultaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -131,7 +131,7 @@ class UserController extends Controller
 
         if(!empty($request->password)){
             $request->merge([ 'password'=> Hash::make ($request['password'])]);
-
+            
            
         }
 
@@ -157,7 +157,14 @@ class UserController extends Controller
 
     }
 
-    public function search(Request $request){
+   /* public function search(Request $request){
+        
+       
+       
+        return['massage'=> 'User deleted'];
+       
+       
+         dd("hola aqui toy");
   
      if($search = \Request::get('q')){
             
@@ -175,6 +182,26 @@ class UserController extends Controller
        }
         return $users;
     
-    }
+    }*/
+    public function search($search){
+        
 
+
+        $cargos=User:: where('name', 'LIKE', "%$search%")
+        ->orWhere('email', 'LIKE', "%$search%")
+         ->orWhere('type', 'LIKE', "%$search%") ->orderBy('id')->paginate(10);
+        
+        
+        if(!$cargos->isEmpty()){
+                
+                    return $cargos;
+                }
+                else{
+              
+                return User::orderBy('id')->paginate(10);
+        
+        
+                }
+
+            } 
 }

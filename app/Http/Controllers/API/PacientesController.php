@@ -164,15 +164,15 @@ class PacientesController extends Controller
 
             $users = Pacientes::where(function($query) use($search){
 
-                $query->where('name', 'LIKE', "%$search%")
-                    ->orWhere('email', 'LIKE', "%$search%")
-                     ->orWhere('type', 'LIKE', "%$search%");
+                $query->where('nombre', 'LIKE', "%$search%")
+                    ->orWhere('apellido', 'LIKE', "%$search%")
+                     ->orWhere('cedula', 'LIKE', "%$search%");
             }) ->paginate(10);
        }else{
-        $pacientes=Pacientes::paginate(5);
+        $users=Pacientes::paginate(5);
 
        }
-        return $pacientes;
+        return $users;
     
     }
 

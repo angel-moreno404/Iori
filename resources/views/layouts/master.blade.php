@@ -158,6 +158,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </router-link>
           </li>
         //@endcan;
+        
+        <li class="nav-item ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user "></i>
+              <p>
+                Medico
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to=/GestorPaciente href="#" class="nav-link ">
+                  <i class="far fas fa-users"></i>
+                  <p>Gestor de Pacientes</p>
+                </router-link >
+              </li>
+
+              <li class="nav-item">
+                 <router-link to=CronogramaCitas href="#" class="nav-link ">
+                  <i class="fas fa-address-card"></i>
+                  <p>Cronograma de citas</p>
+                </route-link>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="nav-item ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user "></i>
+              <p>
+                Recepcion Secretaria
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to=/RecepcionP href="#" class="nav-link ">
+                  <i class="far fas fa-users"></i>
+                  <p>Recepcion de Pacientes</p>
+                </router-link >
+              </li>
+
+              <li class="nav-item">
+                 <router-link to=Facturacion href="#" class="nav-link ">
+                  <i class="fas fa-address-card"></i>
+                  <p>Facturacion</p>
+                </route-link>
+              </li>
+            </ul>
+          </li>
+
           
           <li class="nav-item ">
             <a href="#" class="nav-link">

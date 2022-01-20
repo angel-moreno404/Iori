@@ -17,11 +17,40 @@
                   <!--her we start the experiment -->
         <div class="card-header">
             <h3 class="card-title"> Selecione un Paciente</h3>
-
+            
+           
            
           </div>
-           <div class="card-body table-responsive p-0">
+           
+              <div class="col-md-4">
+                  <input id="input" v-model="form.search" class="form-control col-md-14" placeholder="Indique el Cargo a Buscar" type="search">
+                </div>
+                <div class="col-md-6">
+
+
+                  <button type="input" id="buscar" class="btn btn-primary" @click="buscar()">Buscar
+                   <i class="fa fa-search"></i>
+                 </button>
+
+ <!--<button type="input" id="buscar" class="btn btn-primary" @click="limpiar()">
+         <button type="input" @click.prevent="" class="btn btn-primary">Buscar</button></div>
+
+                        <i class="fa fa-search"></i>
+                      </button>-->
+
+                      <button type="reset" id="buscar" class="btn btn-secondary" @click="limpiar()">
+
+
+                        Limpiar
+                        <i class="fas fa-sync-alt"></i>
+
+                      </button>
+                    </div> </div>
+
+          
+             <!-- here end the search bar-->
             <table class="table table-hover text-nowrap">
+             
               <thead>
                 <tr>
                   <th>ID</th>
@@ -246,7 +275,7 @@
 <script>
 import Form from "vform";
 import axios from "axios";
-import NotFound from './NotFound.vue';
+import NotFound from "./NotFound.vue";
 export default {
   components: { NotFound },
   data() {
@@ -265,90 +294,103 @@ export default {
     };
   },
 
-  mounted(){
+  mounted() {
     console.log(this.$userInfo);
   },
 
   methods: {
-        getProfilePhoto(){
-        let photo = (this.form.photo.length > 200 ) ? this.form.photo :"img/profile/"+this.form.photo;
+    //here estar the method search
+    buscar() {
+      axios
+        .get("api/findConsulta/" + this.form.search)
+        .then(({ data }) => (this.users = data));
+    },
 
-        return photo;
-      },
+    limpiar() {
+      this.form.reset();
+      axios
+        .get("api/findConsulta/" + this.form.search)
+        .then(({ data }) => (this.users = data));
+    },
 
-        updateInfo(){
-          this.$Progress.start();
-           this.form.put('api/profile/')
-           .then(()=>{
-             Fire.$emit("AfterCreate");
-             this.$Progress.finish();
+    //here end the methods  search
 
-           })
-           .catch(()=>{
-             this.$Progress.fail();
-           });
-        },
+    getProfilePhoto() {
+      let photo =
+        this.form.photo.length > 200
+          ? this.form.photo
+          : "img/profile/" + this.form.photo;
 
-        updateProfile(e){
-          //this is to tranlate to base64 the file
-          let file = e.target.files[0];
-          console.log(file);
-          let reader = new FileReader();
-          //let vm= this;
+      return photo;
+    },
 
-          if(file['size'] < 2111775 ){
-
-          
-          reader.onloadend= (file)=>{
-
-            this.photo=reader.result;
-            //console.log('RESULT', reader.result)
-            this.form.photo=reader.result;
-          }
-            reader.readAsDataURL(file);
-         // console.log('uploading');
-        }
-        else{
-          swal({
-            type:'error',
-            title:'Ooops...',
-            text:'you are uploading a large file please try with other more little',
-          })
-          
-        }
-        },
-
-getResults(page = 1) {
-			axios.get('api/user?page=' + page)
-				.then(response => {
-					this.users = response.data;
-				})},
-    updateUser (id)
-    { this.$Progress.start();
-      this.form.put('api/user/'+this.form.id)
-        .then(()=>{
-
-            swal.fire("Updated!", "Your file has been Updated.", "success")
-            $("#addnew").modal("hide");
-            this.$Progress.finish();
-            Fire.$emit("AfterCreate");
+    updateInfo() {
+      this.$Progress.start();
+      this.form
+        .put("api/profile/")
+        .then(() => {
+          Fire.$emit("AfterCreate");
+          this.$Progress.finish();
         })
-        .catch(()=>{
+        .catch(() => {
+          this.$Progress.fail();
+        });
+    },
+
+    updateProfile(e) {
+      //this is to tranlate to base64 the file
+      let file = e.target.files[0];
+      console.log(file);
+      let reader = new FileReader();
+      //let vm= this;
+
+      if (file["size"] < 2111775) {
+        reader.onloadend = (file) => {
+          this.photo = reader.result;
+          //console.log('RESULT', reader.result)
+          this.form.photo = reader.result;
+        };
+        reader.readAsDataURL(file);
+        // console.log('uploading');
+      } else {
+        swal({
+          type: "error",
+          title: "Ooops...",
+          text: "you are uploading a large file please try with other more little",
+        });
+      }
+    },
+
+    getResults(page = 1) {
+      axios.get("api/user?page=" + page).then((response) => {
+        this.users = response.data;
+      });
+    },
+    updateUser(id) {
+      this.$Progress.start();
+      this.form
+        .put("api/user/" + this.form.id)
+        .then(() => {
+          swal.fire("Updated!", "Your file has been Updated.", "success");
+          $("#addnew").modal("hide");
+          this.$Progress.finish();
+          Fire.$emit("AfterCreate");
+        })
+        .catch(() => {
           this.$Progress.fail();
         });
 
-      
-      //console.log('Editing Data') 
+      //console.log('Editing Data')
     },
 
-    editModal(user){
-      this.editmode=true;
+    editModal(user) {
+      this.editmode = true;
       this.form.reset();
       $("#addnew").modal("show");
       this.form.fill(user);
     },
-    newModal(){
-       this.editmode=false;
+    newModal() {
+      this.editmode = false;
       this.form.reset();
       $("#addnew").modal("show");
     },
@@ -366,29 +408,27 @@ getResults(page = 1) {
         })
         .then((result) => {
           //send request to the server
-          if (result.value){
-          this.form
-            .delete(`api/user/${id}`) //ejemplo de como enviar las rutas y promesas
-            .then(() => {
-              swal.fire("Deleted!", "Your file has been deleted.", "success")
-              Fire.$emit("AfterCreate");
-            })
-            .catch(() => {
-              swal("fallo!", "there was something wrong", "warning");
-            });
-        }
+          if (result.value) {
+            this.form
+              .delete(`api/user/${id}`) //ejemplo de como enviar las rutas y promesas
+              .then(() => {
+                swal.fire("Deleted!", "Your file has been deleted.", "success");
+                Fire.$emit("AfterCreate");
+              })
+              .catch(() => {
+                swal("fallo!", "there was something wrong", "warning");
+              });
+          }
         });
     },
 
     loadUsers() {
       /* this is to the permission to block the views a allow just admin*/
 
-      if(this.$gate.isAdminORAuthor()){
+      if (this.$gate.isAdminORAuthor()) {
         axios.get("api/user").then(({ data }) => (this.users = data));
-         //axios.get("api/user").then(({ data }) => (this.users = data.data));
+        //axios.get("api/user").then(({ data }) => (this.users = data.data));
       }
-      
-      
     },
 
     createUser() {
@@ -411,19 +451,16 @@ getResults(page = 1) {
 
   created() {
     //let query = this.$parent.search;
-    Fire.$on('searching', () => {
+    Fire.$on("searching", () => {
       let query = this.$parent.search;
-      axios.get('api/findUser?q=' + query)
-      .then((data)=>{
-        this.users = data.data;
-        //console.log(query);
-      })
-      .catch(()=>{
-
-
-      })
-
-    })
+      axios
+        .get("api/findConsulta?q=" + query)
+        .then((data) => {
+          this.users = data.data;
+          //console.log(query);
+        })
+        .catch(() => {});
+    });
 
     this.loadUsers();
     Fire.$on("AfterCreate", () => {
@@ -431,5 +468,9 @@ getResults(page = 1) {
     });
     // setInterval(() => this.loadUsers(), 3000);
   },
+
+  //
+
+  //
 };
 </script>

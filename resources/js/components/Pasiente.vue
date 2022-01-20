@@ -58,6 +58,15 @@
                   <td>{{ user.created_at | mydate }}</td>
                   <td><span class="tag tag-success">Approved</span></td>
                   <td>
+                    <!-- <div class="shared-item_cards-list-image_card_component__imageWrapper">
+      <div class="shared-item_cards-preview_image_component__carousel shared-item_cards-preview_image_component__singleImage" style="padding-bottom: 20%">
+  <a class="shared-item_cards-preview_image_component__imageLink" data-turbo="false" data-action="analytics-event#send" data-analytics-event="[[&quot;ec:addProduct&quot;,{&quot;brand&quot;:&quot;DotJS&quot;,&quot;category&quot;:&quot;themeforest.net/site-templates/admin-templates&quot;,&quot;id&quot;:21596795,&quot;list&quot;:&quot;Search Results: Category&quot;,&quot;name&quot;:&quot;Tradify - Responsive Crypto and Stock Trading User Interface&quot;,&quot;position&quot;:1}],[&quot;ec:setAction&quot;,&quot;click&quot;,{&quot;list&quot;:&quot;Search Results: Category&quot;}],[&quot;send&quot;,{&quot;hitType&quot;:&quot;event&quot;,&quot;eventCategory&quot;:&quot;Ecommerce&quot;,&quot;eventAction&quot;:&quot;click&quot;,&quot;eventLabel&quot;:&quot;Product click: product list&quot;}]]" href="https://themeforest.net/item/tradify-responsive-crypto-and-stock-trading-user-interface/21596795">
+      <img src="https://themeforest.img.customer.envatousercontent.com/files/273203155/main+preivew.png?auto=compress%2Cformat&amp;fit=crop&amp;crop=top&amp;w=590&amp;h=300&amp;s=16aa574f9fbf857a561eaf711e2459c4" loading="lazy" style="left: 50%" class="shared-item_cards-preview_image_component__image" alt="Tradify - Responsive Crypto and Stock Trading User Interface" title="Tradify - Responsive Crypto and Stock Trading User Interface" data-controller="image-preview" data-action="error->image-preview#setFallback" data-fallback="https://previews.customer.envatousercontent.com/files/273203155/main%20preivew.__large_preview.png" data-carousel-target="image" width="200" height="150">
+</a></div>
+
+      
+    </div>
+    -->
                     <a href="#" @click="editModal(user)">
                       <i class="fa fa-edit blue"></i>
                     </a>

@@ -45,6 +45,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');        
 
 //this to intervention image
-Route::get('/file-resize', [ResizeController::class, 'index']);
+//Route::get('/file-resize', [ResizeController::class, 'index']);
 
-Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
+//Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
