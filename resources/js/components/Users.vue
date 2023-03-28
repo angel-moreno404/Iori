@@ -57,9 +57,8 @@
 
           <pagination :data="users" @pagination-change-page="getResults"></pagination>
 
-            <span slot="prev-nav">&lt; Previous</span>
-            <span slot="next-nav">Next &gt;</span>
-          </pagination>
+            
+         
         </div>
 
         </div>
@@ -94,6 +93,7 @@
             <div class="modal-body">
               <!-- name -->
               <div class="form-group">
+                
                 <input
                   v-model="form.name"
                   type="text"

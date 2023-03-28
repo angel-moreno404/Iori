@@ -304,13 +304,14 @@ export default {
       axios
         .get("api/findConsulta/" + this.form.search)
         .then(({ data }) => (this.users = data));
+        
     },
 
     limpiar() {
       this.form.reset();
       axios
         .get("api/findConsulta/" + this.form.search)
-        .then(({ data }) => (this.users = data));
+        .then(({ data }) => (users = data));
     },
 
     //here end the methods  search

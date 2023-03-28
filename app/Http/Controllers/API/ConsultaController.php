@@ -186,7 +186,7 @@ class ConsultaController extends Controller
     public function search($search){
         
 
-
+       
         $cargos=User:: where('name', 'LIKE', "%$search%")
         ->orWhere('email', 'LIKE', "%$search%")
          ->orWhere('type', 'LIKE', "%$search%") ->orderBy('id')->paginate(10);
