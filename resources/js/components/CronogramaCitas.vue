@@ -132,7 +132,7 @@
               </div> -->
                     <!--  -->
                   
-
+                    <not-found></not-found>  
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Salir</button>
@@ -148,10 +148,11 @@
 <script>
 import Vue from "vue";
 import vSelect from "vue-select";
-
+import NotFound from './NotFound.vue';
 Vue.component("v-select", vSelect);
 import "vue-select/dist/vue-select.css";
     export default {
+      components: { NotFound },
       data() {
         return {
           editmode:false,

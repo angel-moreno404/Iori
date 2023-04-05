@@ -122,6 +122,39 @@ Vue.component(
   'not-found', require('./components/NotFound.vue').default
 );
 
+
+Vue.component(
+  'chatglobal', require('./components/ComponentesDinamicos/ChatGlobal.vue').default
+);
+
+Vue.component(
+  'chatdirecto', require('./components/ComponentesDinamicos/ChatDirecto.vue').default
+);
+
+
+{/* <GestorPacientes></GestorPacientes> */}
+Vue.component('GestorPacientes', {
+  template: '<div>Este es mi componente dinámico.</div>'
+});
+
+const app2 = new Vue({
+  el: '#dynamic-component',
+  template: '<chatglobal></chatglobal>'
+/*   template: '<div>hola</div>' */
+});
+
+
+const app3 = new Vue({
+  el: '#dynamic-component2',
+  template: '<chatdirecto></chatdirecto>'
+
+});
+
+/* app2.$mount(); */
+
+
+/*  */
+
 const app = new Vue({
   el: '#app',
   router,

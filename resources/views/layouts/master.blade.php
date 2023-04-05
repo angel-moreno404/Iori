@@ -352,13 +352,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       </div><!-- /.container-fluid -->
     </div>
+    <div>
+   
+      
+    
 
+    </div>
 
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
-  
+  <!--  -->
+<div class="fb-navbar">
+  <div class="fb-navbar__icon">
+    <i class="fab fa-facebook"></i>
+  </div>
+  <div class="fb-navbar__search">
+    <div id="dynamic-component" style="background-color:red"></div>
+    <input type="text" placeholder="Buscar en Facebook">
+    
+    <i class="fas fa-search"></i>
+  </div>
+  <div class="fb-navbar__menu">
+    <div id="dynamic-component2"></div>
+    <i class="fas fa-user"></i>
+    <i class="fas fa-comments"></i>
+    <i class="fas fa-bell"></i>
+  </div>
+</div>
+<!--  -->
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -376,6 +399,63 @@ scratch. This page gets rid of all links and provides the needed markup only.
   window.user = @json(auth()->user())
 
 </script>
+
+
+<style>
+  .fb-navbar {
+    background-color: #343a40;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+  }
+  
+  .fb-navbar__icon i {
+    font-size: 30px;
+  }
+  
+  .fb-navbar__search input[type="text"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .fb-navbar__search i {
+    font-size: 20px;
+  }
+  
+  .fb-navbar__menu i {
+    font-size: 25px;
+    margin-left: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .fb-navbar {
+      justify-content: center;
+    }
+  
+    .fb-navbar__search {
+      display: none;
+    }
+  
+    .fb-navbar__menu {
+      margin-right: 0;
+    }
+  
+    .fb-navbar__menu i {
+      margin: 0 10px;
+    }
+  }</style>
 
 @endauth
 
