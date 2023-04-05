@@ -33,6 +33,7 @@
         "vform": "^2.1.2",
         "vue-passport": "^1.1.0",
         "vue-progressbar": "^0.7.5",
-        "vue-router": "^3.5.3"
+        "vue-router": "^3.5.3",
+        "vue-select": "^3.20.2"
     }
 }
