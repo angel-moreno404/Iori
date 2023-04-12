@@ -210,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li> --}}
 
           
-         {{--  <li class="nav-item ">
+          <li class="nav-item ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-hospital-user "></i>
               <p>
@@ -233,7 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </route-link>
               </li>
             </ul>
-          </li> --}}
+          </li>
 
           <li class="nav-item ">
             <a href="#" class="nav-link">
@@ -354,8 +354,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <div>
    
-      
-    
+      <div id="dynamic-component2"></div>
+      <div id="dynamic-component" ></div>
 
     </div>
 
@@ -363,19 +363,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.content-wrapper -->
 
-  <!--  -->
+  <!-- barra inferior -->
 <div class="fb-navbar">
   <div class="fb-navbar__icon">
     <i class="fab fa-facebook"></i>
   </div>
   <div class="fb-navbar__search">
-    <div id="dynamic-component" style="background-color:red"></div>
+   
     <input type="text" placeholder="Buscar en Facebook">
     
     <i class="fas fa-search"></i>
   </div>
   <div class="fb-navbar__menu">
-    <div id="dynamic-component2"></div>
+   
     <i class="fas fa-user"></i>
     <i class="fas fa-comments"></i>
     <i class="fas fa-bell"></i>

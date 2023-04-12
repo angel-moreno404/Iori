@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class=" chatdirecto justify-content-center">
             <!--  -->
 
             <div class="card">
@@ -93,4 +93,22 @@ PlayStation 4 500GB Console (PS4)
         }
     }
 </script>
+<style>
+.chatdirecto{
+
+    /* background-color: #343a40; */
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 1600px;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 500px;
+}
+
+</style>
 
